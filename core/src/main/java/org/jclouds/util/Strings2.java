@@ -113,31 +113,6 @@ public class Strings2 {
       }
    }
 
-   public static String replaceAll(String returnVal, Pattern pattern, String replace) {
-      Matcher m = pattern.matcher(returnVal);
-      returnVal = m.replaceAll(replace);
-      return returnVal;
-   }
-
-   public static String replaceAll(String input, char match, String replacement) {
-      if (input.indexOf(match) != -1) {
-         try {
-            input = CHAR_TO_PATTERN.get(match).matcher(input).replaceAll(replacement);
-         } catch (ExecutionException e) {
-            throw new IllegalStateException("error creating pattern: " + match, e);
-         }
-      }
-      return input;
-   }
-
-   private static final LoadingCache<Character, Pattern> CHAR_TO_PATTERN = CacheBuilder.newBuilder()
-         .<Character, Pattern> build(new CacheLoader<Character, Pattern>() {
-            @Override
-            public Pattern load(Character plain) {
-               return Pattern.compile(plain + "");
-            }
-         });
-   
    public static String toString(InputSupplier<? extends InputStream> supplier)
          throws IOException {
       return CharStreams.toString(CharStreams.newReaderSupplier(supplier,
@@ -192,7 +167,7 @@ public class Strings2 {
    public static String replaceTokens(String input, Multimap<String, ?> tokenValues) {
       for (Entry<String, ?> tokenValue : tokenValues.entries()) {
          Pattern pattern = TOKEN_TO_PATTERN.getUnchecked(tokenValue.getKey());
-         input = replaceAll(input, pattern, tokenValue.getValue().toString());
+         input = pattern.matcher(input).replaceAll(tokenValue.getValue().toString());
       }
       return input;
    }
