@@ -30,6 +30,7 @@ import org.jclouds.Fallbacks.NullOnNotFoundOr404;
 import org.jclouds.dynect.v3.domain.Job;
 import org.jclouds.dynect.v3.features.GeoRegionGroupApi;
 import org.jclouds.dynect.v3.features.GeoServiceApi;
+import org.jclouds.dynect.v3.features.HttpRedirectApi;
 import org.jclouds.dynect.v3.features.RecordApi;
 import org.jclouds.dynect.v3.features.SessionApi;
 import org.jclouds.dynect.v3.features.ZoneApi;
@@ -83,6 +84,12 @@ public interface DynECTApi extends Closeable {
     */
    @Delegate
    RecordApi getRecordApiForZone(@PathParam("zone") String zone);
+
+   /**
+    * Provides access to HTTP Redirection features
+    */
+   @Delegate
+   HttpRedirectApi getHttpRedirectApiForZone(@PathParam("zone") String zone);
 
    /**
     * Provides access to Geo features.
