@@ -31,7 +31,6 @@ import javax.ws.rs.Produces;
 import org.jclouds.Fallbacks.NullOnNotFoundOr404;
 import org.jclouds.dynect.v3.DynECTExceptions.JobStillRunningException;
 import org.jclouds.dynect.v3.binders.CreateHttpRedirectBinder;
-import org.jclouds.dynect.v3.binders.HttpRedirectBinder;
 import org.jclouds.dynect.v3.domain.Job;
 import org.jclouds.dynect.v3.domain.redirect.HttpRedirect;
 import org.jclouds.dynect.v3.filters.AlwaysAddContentType;
